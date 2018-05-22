@@ -72,7 +72,9 @@ public class CmdServiceImpl implements CmdService {
 
     @Override
     public String createSession(Job job, Integer retry) {
-        CmdInfo cmdInfo = new CmdInfo(zone, null, CmdType.CREATE_SESSION, null);
+//        String agentZone = job.getEnv("FLOW_AGENT_ZONE", zone);
+        String agentName = job.getEnv("FLOW_AGENT_NAME", null);
+        CmdInfo cmdInfo = new CmdInfo(zone, agentName, CmdType.CREATE_SESSION, null);
         cmdInfo.setWebhook(buildCmdWebhook(job));
         log.trace("Create session for job: {}", job.getId());
 
