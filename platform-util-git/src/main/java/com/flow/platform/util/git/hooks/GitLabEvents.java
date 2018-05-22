@@ -25,7 +25,7 @@ import com.flow.platform.util.git.model.GitPullRequestInfo;
 import com.flow.platform.util.git.model.GitPushTagEvent;
 import com.flow.platform.util.git.model.GitSource;
 import com.google.gson.annotations.SerializedName;
-import java.util.Map;
+
 import java.util.Objects;
 
 /**
@@ -92,6 +92,8 @@ public class GitLabEvents {
         public final static String STATE_OPEN = "opened";
 
         public final static String STATE_CLOSE = "merged";
+
+        public final static String STATE_REOPEN = "reopened";
 
         private class RequestRoot {
 
@@ -165,7 +167,7 @@ public class GitLabEvents {
 
                 GitPullRequestEvent prEvent = new GitPullRequestEvent(gitSource, eventType);
 
-                if (Objects.equals(attrs.state, STATE_OPEN)) {
+                if (Objects.equals(attrs.state, STATE_OPEN) || Objects.equals(attrs.state, STATE_REOPEN)) {
                     prEvent.setState(State.OPEN);
                     prEvent.setMergedBy("");
                 }
