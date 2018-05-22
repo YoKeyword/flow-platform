@@ -60,7 +60,7 @@ public class ZooKeeperConfig {
         File zkDataPath = Paths.get(System.getProperty("java.io.tmpdir", "/tmp/flow-zookeeper"), "zookeeper", "data").toFile();
         EMBEDDED_ZOOKEEPER_PROP.setProperty("dataDir", zkDataPath.getAbsolutePath());
         EMBEDDED_ZOOKEEPER_PROP.setProperty("clientPort", "2181");
-        EMBEDDED_ZOOKEEPER_PROP.setProperty("clientPortAddress", "0.0.0.0");
+        EMBEDDED_ZOOKEEPER_PROP.setProperty("clientPortAddress", "172.17.12.235");
         EMBEDDED_ZOOKEEPER_PROP.setProperty("tickTime", "1500");
         EMBEDDED_ZOOKEEPER_PROP.setProperty("maxClientCnxns", "50");
     }
@@ -100,7 +100,7 @@ public class ZooKeeperConfig {
     public ZKClient zkClient() {
         if (enableEmbeddedServer) {
             if (startEmbeddedServer()) {
-                final String localZkHost = "127.0.0.1:2181";
+                final String localZkHost = "172.17.12.235:2181";
                 ZKClient zkClient = new ZKClient(localZkHost, clientTimeout);
 
                 if (zkClient.start()) {
